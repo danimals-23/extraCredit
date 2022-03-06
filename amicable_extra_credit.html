@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Amicable Numbers</title>
+<style>
+    body{
+        background-color: #1d211d;
+        color:beige;
+        text-align: center;
+    }
+    .wrapper{
+        width: 400px;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    .wrapper label{
+        display: block;
+        margin: 0.5em 0;
+    }
+    .wrapper label input{
+        font-size: 18px;
+        padding: 0.5em;
+    }
+    #result{
+        margin: auto;
+        margin-top: 10px;
+        text-align: center;
+        padding: 6px;
+        width: 250px;
+        height: 75px;
+        border: 1px solid beige;
+        font-size: 30px;
+    }
+    #facs{
+        margin: auto;
+        margin-top: 10px;
+        text-align: center;
+        padding: 6px;
+        width: 250px;
+        height: 150px;
+        border: 1px solid beige;
+        font-size: 20px;
+    }
+</style>
+<script>
+    window.onload = function() {
+        btn = document.getElementById("calculate");
+        btn.onclick = buttonPress;
+    }
+
+    function buttonPress() {
+        x = parseInt(document.getElementById('num1').value);
+        y = parseInt(document.getElementById('num2').value);
+        
+        x_factors = getFactors(x);
+        y_factors = getFactors(y);
+
+        xf_text = facToString(x_factors);
+        yf_text = facToString(y_factors);
+
+        if(areAmicable(x, y, x_factors, y_factors)){
+            document.getElementById('result').innerHTML =
+            x + " and " + y + " are amicable! <br />";
+        }
+        else{
+            document.getElementById('result').innerHTML =
+            x + " and " + y + " are not amicable. <br />";
+        }
+        alert(
+            "The factors of " + x + " are: " + xf_text + " ] and "
+            + "the factors of " + y + " are: " + yf_text + " ]");
+    }
+
+    function getFactors(n) {
+        const arr = [];
+        // loops through until it reaches the square root of the number
+        for(let i = 1; i <= Math.floor(Math.sqrt(n)); i++){
+            if(n % i == 0){
+                arr.push(i);
+                if(i != 1){
+                    arr.push(n/i);
+                }
+            }
+        }
+        arr.sort(function(a, b){return a - b});
+        return arr;
+    }
+
+    function facToString(arr){
+        text = "[";
+        for(i = 0; i < arr.length; i++){
+            text = text + " " + arr[i];
+        }
+        return text;
+    }
+
+    function areAmicable(num1, num2, arr1, arr2){
+        sum1 = 0;
+        sum2 = 0;
+        for(i = 0; i < arr1.length; i++){
+            sum1 = sum1 + arr1[i];
+        }
+        for(i = 0; i < arr2.length; i++){
+            sum2 = sum2 + arr2[i];
+        }
+        if(sum1 == num2 && sum2 == num1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+</script>
+
+</head>
+<body>
+    <h1>Amicable Numbers Calculator</h1>
+
+    <div class="wrapper">
+        <form class="form">
+            <label id="n1">
+                <input type="number" name='number1' id='num1' placeholder="Enter a number" required />
+            </label>
+            <label id="n2">
+                <input type="number" name='number2' id='num2' placeholder="Enter a number" required />
+            </label>
+            <input type="button" name ="calculate" value = "Calculate" id = "calculate">
+    </div>
+
+    <div id="result">
+        &nbsp;
+    </div>
+</body>
+
+</html>
