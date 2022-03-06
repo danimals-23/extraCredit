@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Jump</title>
+<style type="text/css">
+	html,body {
+        font-size: 28px;
+        text-align: center;
+        background-color: rgb(58, 104, 53);
+        color: white;
+    }
+	#t1 {
+        padding: 6px;
+        width: 150px;
+        height: 100px;
+        border: 1px solid #333;
+    }
+	#t2 {
+        padding: 6px;
+        width: 150px; 
+        border: 1px solid #333;
+    }
+	input[type='button'] {font-size: 28px;}
+</style>
+<script language="javascript">
+    window.onload = function() {
+        btn = document.getElementById("jump");
+        btn.onclick = buttonPress;
+        btn.addEventListener("click", buttonPress);
+        
+        btn.onclick = function() {
+            if(validate()){
+                text = document.form2.t2.value;
+                document.form2.t2.value = document.form1.t1.value;
+                document.form1.t1.value = text;
+            }
+        }
+    }
+
+    function buttonPress()
+    {
+        var1 = document.getElementById("text1");
+        var2 = document.getElementById("text2");
+        val = var2.value;
+        var2.value = var1.value;
+        var1.value = val;
+
+        if(text1.value == '' && text2.value != ''){
+            jump.value="< Jump";
+        }
+        else if(text1.value != '' && text2.value == ''){
+            jump.value="Jump >";
+        }
+        else{
+            jump.value="Jump";
+        }
+    }
+
+    function validate()
+    {
+        if(document.getElementById("text1").value == "" && document.getElementById("text2").value == ""){
+            alert("Enter some text into the text boxes");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    </script>
+
+<body>
+    <h1>Jump!</h1>
+    <form name = 'form1'
+    method ="get"  action="#" >
+	<input type="text" name = 't1' id='text1'>
+    <input type = "button" name ="jump" value = "Jump" id = "jump">
+	<input type="text" name = 't2' id='text2'>
+	<br /> <br /> Press the button above to have text jump from one cell to the other!
+</form>
+</body>
+</html>
