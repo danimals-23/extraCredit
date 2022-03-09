@@ -1,0 +1,41 @@
+body{
+    text-align: center;
+    color: white;
+    background-color: #426e48;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.results{
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    padding: 6px;
+    width: 400px;
+    border: 1px solid beige;
+    font-size: 20px;
+}
+
+.button1 {
+    background-color: #426e48;
+    color: white;
+    border: 1px solid white; 
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.button1:hover {
+    background-color: #5bbe98;
+    color: rgb(131, 255, 141);
+}
+
+/* Styling for Checkboxes */
+input[type='checkbox'] {
+    width:25px;
+    height:25px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+}
+input[type='checkbox']:checked {
+    background: #abd;
+}

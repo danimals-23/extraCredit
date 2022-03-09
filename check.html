@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link type="text/css" href="style.css" rel="stylesheet"/>
+<title>Checkboxes</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script language="JavaScript">
+
+    // Function checks to see if each box is checked, toggles if false, does
+    // nothing if true.
+    function check_uncheck_checkbox(isChecked) {
+        if(isChecked) {
+            $('#checkAll').text("Uncheck All");
+            $('input[name="box"]').each(function() { 
+                this.checked = true; 
+            });
+        } else {
+            $('#checkAll').text("Check All");
+            $('input[name="box"]').each(function() {
+                this.checked = false;
+            });
+        }
+    }
+
+    // Checks to see if all checkboxes are checked, changes text accordingly
+    function check() {
+        this.checked = true;
+        if(checkState()){
+            $('#checkall').prop('checked', true);
+            $('#checkAll').text("Uncheck All");
+        }
+        else{
+            $('#checkAll').text("Check All");
+            $('#checkall').prop('checked', false);
+        }
+    }
+
+    // checks to see if each checkbox is checked or not, returns true or false
+    function checkState() {
+        flag = true;
+        $('input[name="box"]').each(function(){
+            if(this.checked == false){
+                flag = false;
+            }
+        })
+        return flag;
+    }
+    </script>
+
+</head>
+
+<body>
+    <h1>Check-All / Uncheck-All!</h1>
+<div id="divCheckAll">
+    <input type="checkbox" name="checkall" id="checkall" onClick="check_uncheck_checkbox(this.checked);" /><label id="checkAll" for="button">Check all</label></div>
+    <br />
+    <br />
+    <div id="divCheckboxList">
+        <div class="divCheckboxItem"><input type="checkbox" name="box" id="box1" value="first" onclick="check()"/>First</div>
+        <div class="divCheckboxItem"><input type="checkbox" name="box" id="box2" value="second" onclick="check()"/>Second</div>
+        <div class="divCheckboxItem"><input type="checkbox" name="box" id="box3" value="third" onclick="check()"/>Third</div>
+        <div class="divCheckboxItem"><input type="checkbox" name="box" id="box4" value="fourth" onclick="check()"/>Fourth</div>
+    </div>
+</body>
+
+
+</html>

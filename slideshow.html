@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>slideshow</title>
+<style type="text/css">
+
+h1 {
+    font-size: 50px;
+}
+body{
+    text-align: center;
+    margin: 0 auto;
+    background-color: #426e48;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+}
+#wrapper {
+    text-align: center;
+    margin: 0 auto;
+    padding: 0px;
+    width: 550px;
+    height: 550px;
+    border: 3px solid black;
+}
+input[type="button"]{
+    background: white;
+    color: black;
+    border: 1px solid #1f3121;
+    width: 150px;
+    height: 35px;
+    border-radius: 20px;
+    margin: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
+.button:hover{
+    background: rgb(26, 48, 30);
+    color: white;
+}
+#img_div {
+    margin-top: 10px;
+}
+img {
+    border-radius: 3px;
+    /* padding: 5px; */
+    max-width: 500px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script language="javascript">
+    var time; // keeps track of the current interval
+    currIndex = 0;
+    // stores image names into an array
+    images = ["image1.jpg'", "image2.jpg'", "image3.jpg'", "image4.jpg'", "image5.jpg'"];
+
+    function start_slideshow(){
+        // clearInterval(time);
+        time=setInterval(function(){
+
+            // loops through image array
+            currIndex++;
+            currIndex = currIndex % images.length;
+            $("#img_div").fadeOut(300, function(){
+            document.getElementById("img_div").innerHTML="<img src='images/" + images[currIndex] + "'>";
+            })
+
+        $("#img_div").fadeIn(1500);
+        }, 3000)
+    }
+
+    // clears the time interval, stops the slideshow
+    function stop_slideshow(){
+        clearInterval(time);
+    }
+</script>
+</head>
+
+<body>
+    <h1>Ratatouille Slideshow</h1>
+    <div id="wrapper">
+        <div id="img_div">
+            <img src='images/image1.jpg'>
+        </div>
+    </div>
+    <div id="buttonWrapper">
+        <input class="button" type="button" value="Start" onclick="start_slideshow();">
+        <input class="button" type="button" value="Stop" onclick="stop_slideshow();">
+    </div>
+</body>
+</html>

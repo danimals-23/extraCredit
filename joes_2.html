@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link type="text/css" href="style.css" rel="stylesheet"/>
+    <title>Joe's Hotdogs 2</title>
+
+    <script language="javascript">
+        window.onload = function() {
+            btn = document.getElementById("order");
+            btn.onclick = run;
+        }
+
+        function run() {
+            if(validate()) {
+                numHotdogs = parseInt(document.getElementById("hotdogs").value);
+                numSodas = parseInt(document.getElementById("sodas").value);
+                numFries = parseInt(document.getElementById("fries").value);
+
+                hdPrice = price(numHotdogs, 3.75);
+                sPrice = price(numSodas, 1.80);
+                fPrice = price(numFries, 2.00);
+
+                subtotal = hdPrice + fPrice + sPrice;
+
+                displayString = "Hotdogs ordered: " + numHotdogs + "; Price: $" + hdPrice.toFixed(2) + "<br />";
+                displayString += "Fries ordered: " + numFries + "; Price: $" + fPrice.toFixed(2) + "<br />";
+                displayString += "Sodas ordered: " + numSodas + "; Price: $" + sPrice.toFixed(2) + "<br />";
+                displayString += "Subtotal: $" + subtotal.toFixed(2) + "<br />";
+                displayString = calculateDiscount(subtotal, displayString);
+
+                document.getElementById("results").innerHTML = displayString;
+            }
+        }
+
+        function calculateDiscount(x, str){
+            if(x >= 20){
+                discount = x * 0.1;
+                finalSubtotal = x - discount;
+                tax = finalSubtotal * 0.0625;
+                finalPrice = finalSubtotal + tax;
+                str += "<br /> Your received a 10% discount on your order! <br />";
+                str += "Discounted value: $" + discount.toFixed(2) + "<br />";
+                str += "Final subtotal: $" + finalSubtotal.toFixed(2) + "<br />";
+                str += "Tax: $" + tax.toFixed(2) + "<br />"; 
+                str += "<br /> Final price: $" + finalPrice.toFixed(2) + "<br />";
+            }
+            return str;
+        }
+
+
+        function price(numItems, cost) {
+            return numItems * cost;
+        }
+
+        function validate() {
+            if(document.getElementById("hotdogs").value == "0" && document.getElementById("fries").value == "0"
+                && document.getElementById("sodas").value == "0"){
+                alert("Select an item please");
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Joe's Hotdogs</h1>
+    <form name="form" method="get" action="#">
+            Hotdogs: $3.75/unit &nbsp; &nbsp; Amount:
+        <select id="hotdogs" name="hotdogs">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+        </select>
+        <br/>
+            Fries: $2.00/unit &nbsp; &nbsp; &nbsp; &nbsp; Amount: 
+        <select id="fries" name="fries">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+        </select>
+        <br/>
+            Soda: $1.80/unit &nbsp; &nbsp; &nbsp; &nbsp; Amount:
+        <select id="sodas" name="sodas">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+        </select>
+        <br/>
+        <br/>
+        <input type = "button" name = "order" value = "Order" id="order" class="button1">
+        <br/><br/>
+        <div class="result">
+            <div class = "results" id="results">&nbsp;</div>
+        </div>
+        <br/>
+        <br/>
+    </form>
+</body>
+</html>
